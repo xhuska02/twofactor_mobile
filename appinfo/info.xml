@@ -5,18 +5,19 @@
     SPDX-FileCopyrightText: Luděk Huška <xhuska02@vutbr.cz>
     SPDX-License-Identifier: CC0-1.0
     -->
-    <id>twofactormobile</id>
+    <id>twofactor_mobile</id>
     <name>Twofactor Mobile</name>
     <summary>multifactor authentication with use of mobile APP</summary>
     <description><![CDATA[multifactor authentication with use of mobile APP]]></description>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <licence>agpl</licence>
     <author mail="xhuska02@vutbr.cz" >Luděk Huška</author>
-    <namespace>twofactor_mobile</namespace>
+    <namespace>TwofactorMobile</namespace>
     <category>security</category>
+    <website>ttps://github.com/xhuska02/twofactor_mobile</website>
     <bugs>https://github.com/xhuska02/twofactor_mobile/issues</bugs>
     <dependencies>
-        <nextcloud min-version="27" max-version="27"/>
+        <nextcloud min-version="21" max-version="99"/>
     </dependencies>
     <navigations>
         <navigation>
