@@ -1,5 +1,5 @@
 <!--
-@copyright Copyright (c) 2024, Ludek Huska (xhuska02@vutbr.cz)
+@copyright Copyright (c) 2024, Luděk Huška (xhuska02@vutbr.cz)
 
 @license GNU AGPL version 3 or any later version
 
