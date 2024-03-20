@@ -18,12 +18,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
 <?php
-style('twofactor_webeid', 'style');
-script('twofactor_webeid', 'web-eid');
-script('twofactor_webeid', 'web-eid-challenge');
+style('twofactormobile', 'style');
+script('twofactormobile', 'web-eid');
+script('twofactormobile', 'web-eid-challenge');
 ?>
 
-<img class="two-factor-icon" src="<?php print_unescaped(image_path('twofactor_webeid', 'webeid-card.svg')); ?>">
+<img class="two-factor-icon" src="<?php print_unescaped(image_path('twofactormobile', 'webeid-card.svg')); ?>">
 
 <!-- <p><?php p('Custom Web-eID solution must be installed on your machine!') ?></p> -->
 <p><?php p('Please insert your smartcard and click on button below.') ?></p>
