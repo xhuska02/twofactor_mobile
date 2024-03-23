@@ -20,6 +20,7 @@ class Application extends App implements IBootstrap {
 
 
 	public function register(IRegistrationContext $context): void {
+	    require_once __DIR__.'/../../vendor/autoload.php';
 		/*
 		 * For further information about the app bootstrapping, please refer to our documentation:
 		 * https://docs.nextcloud.com/server/latest/developer_manual/app_development/bootstrap.html
