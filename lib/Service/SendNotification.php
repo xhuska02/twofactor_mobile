@@ -14,7 +14,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
+ * GNU Affero Genera$this->userConfigl Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
@@ -30,10 +30,11 @@ namespace OCA\TwofactorMobile\Service;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Auth\HttpHandler\HttpHandlerFactory;
 
-$token = "fXQTOd8_T2e63Y9zqNarv5:APA91bEJiNih5dc0wz5-JC9NYDLr-afPzAYvarXo-2a7XLAKVvEI_J_UKSD2kDDyfDLjcn_fvm0Q1nEXwbPLkCjRJXtS_S-YoKC96aeHyRP0AttdbqUwXPoXteO2daj7-F_PjTak0L4b";
-$text = "Si mega chábr";
-$sendNotification = new SendNotification(); // Vytvoření instance třídy SendNotification
-$response = $sendNotification->sendNotification($token, $text);
+// Just for testing purposes.
+// $token = "fXQTOd8_T2e63Y9zqNarv5:APA91bEJiNih5dc0wz5-JC9NYDLr-afPzAYvarXo-2a7XLAKVvEI_J_UKSD2kDDyfDLjcn_fvm0Q1nEXwbPLkCjRJXtS_S-YoKC96aeHyRP0AttdbqUwXPoXteO2daj7-F_PjTak0L4b";
+// $text = "Si mega chábr";
+// $sendNotification = new SendNotification(); // Vytvoření instance třídy SendNotification
+// $response = $sendNotification->sendNotification($token, $text);
 
 class SendNotification{
 
@@ -43,9 +44,10 @@ class SendNotification{
         
         require '/var/www/html/custom_apps/twofactormobile/vendor/autoload.php'; 
 
+
         $credential = new ServiceAccountCredentials(
             "https://www.googleapis.com/auth/firebase.messaging",
-            json_decode(file_get_contents('../../mob.json'), true)
+            json_decode(file_get_contents('/var/www/html/custom_apps/twofactormobile/mob.json'), true)
         );
 
         $token = $credential->fetchAuthToken(HttpHandlerFactory::build());
@@ -61,8 +63,12 @@ class SendNotification{
                 "message": {
                     "token": "' . $userToken . '",
                 "notification": {
-                    "title": "Authorization",
+                    "title": "Please authorize for login lol",
                     "body": "' . $signText . '",
+                },
+                "data": {
+                    "title": "Please authorize for login xD",
+                    "body": "' . $signText . '"
                 },
                 "webpush": {
                     "fcm_options": {
@@ -77,13 +83,13 @@ class SendNotification{
 
         $response = curl_exec($ch);
 
-        echo $response;
-
         curl_close($ch);
 
         return $response;
 		
 	}
+
+
 
 }
 

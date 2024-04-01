@@ -13,6 +13,8 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'twofactormobile';
+	public const SUBJECT_APP_TOKEN_ID = 'fXQTOd8_T2e63Y9zqNarv5:APA91bEJiNih5dc0wz5-JC9NYDLr-afPzAYvarXo-2a7XLAKVvEI_J_UKSD2kDDyfDLjcn_fvm0Q1nEXwbPLkCjRJXtS_S-YoKC96aeHyRP0AttdbqUwXPoXteO2daj7-F_PjTak0L4b';
+	public const PUBLIC_KEY_OF_USER = '';
 
 	public function __construct() {
 		parent::__construct(self::APP_ID);

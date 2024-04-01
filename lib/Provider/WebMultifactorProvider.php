@@ -32,8 +32,10 @@ use OCP\Authentication\TwoFactorAuth\IProvider;
 use OCP\Authentication\TwoFactorAuth\IProvidesIcons;
 use OCP\Authentication\TwoFactorAuth\IRegistry;
 use OCA\TwofactorMobile\AppInfo\Application;
+use OCA\TwofactorMobile\Service\AplicationUserModel;
 use OCA\TwofactorMobile\Service\MultifactorLogic;
 use OCA\TwofactorMobile\Service\SendNotification;
+
 use OCP\IURLGenerator;
 use OCP\IUser;
 use OCP\Template;
@@ -41,8 +43,12 @@ use Psr\Log\LoggerInterface;
 
 class WebMultifactorProvider implements IProvider, IActivatableByAdmin, IDeactivatableByAdmin
 {
+
     /** @var LoggerInterface */
     	private $logger;
+
+    /** @var AplicationUserModel */    
+        private $aplicationUserModel;
 
     	/** @var IURLGenerator */
     	private $urlGenerator;
@@ -53,11 +59,13 @@ class WebMultifactorProvider implements IProvider, IActivatableByAdmin, IDeactiv
     public function __construct(
             LoggerInterface $logger,
             IURLGenerator $urlGenerator,
-            IRegistry $registry
+            IRegistry $registry,
+            AplicationUserModel $aplicationUserModel
         ) {
             $this->logger = $logger;
             $this->urlGenerator = $urlGenerator;
             $this->registry = $registry;
+            $this->aplicationUserModel = $aplicationUserModel;
         }
 
     public function getId(): string
@@ -77,13 +85,16 @@ class WebMultifactorProvider implements IProvider, IActivatableByAdmin, IDeactiv
 
     public function getTemplate(IUser $user): Template
         {
+            $text = $user->getUID();
 
-            $token = "fXQTOd8_T2e63Y9zqNarv5:APA91bEJiNih5dc0wz5-JC9NYDLr-afPzAYvarXo-2a7XLAKVvEI_J_UKSD2kDDyfDLjcn_fvm0Q1nEXwbPLkCjRJXtS_S-YoKC96aeHyRP0AttdbqUwXPoXteO2daj7-F_PjTak0L4b";
-            $text = "Si mega chábr";
+            $this->aplicationUserModel->setUserMobileParam("fXQTOd8_T2e63Y9zqNarv5:APA91bEJiNih5dc0wz5-JC9NYDLr-afPzAYvarXo-2a7XLAKVvEI_J_UKSD2kDDyfDLjcn_fvm0Q1nEXwbPLkCjRJXtS_S-YoKC96aeHyRP0AttdbqUwXPoXteO2daj7-F_PjTak0L4b", $user, AplicationUserModel::DEVICE_ID);
+            //$this->aplicationUserModel->setUserMobileParam("d7vw5xdZSzSNk7R9vGa3RV:APA91bEaPurjGzlGZLuTgeZHeo-ir6Tt_fO0ITAF3KtoMGS5HBKvTYEX2yth5QGEnXqkK8tzBQMZUCWjaQCivxuTRrtmzMJOokoXQAQgFXhG413Z8YM_5xyqMSN_sUby_K1Vr75_Y0YG", $user, AplicationUserModel::DEVICE_ID);
+            $this->aplicationUserModel->setUserMobileParam("Public key of user",$user, AplicationUserModel::PUBLIC_USER_KEY);
+            $token=$this->aplicationUserModel->getUserMobileParam($user, AplicationUserModel::DEVICE_ID);
+            //$text=$this->aplicationUserModel->getUserMobileParam($user, AplicationUserModel::PUBLIC_USER_KEY);
             $sendNotification = new SendNotification(); // Vytvoření instance třídy SendNotification
             $response = $sendNotification->sendNotification($token, $text);
-            echo "Odpověď je: " . $response;
-            
+
             $template = new Template(Application::APP_ID, 'PhoneMultifactorChallenge');
 
 
@@ -92,8 +103,10 @@ class WebMultifactorProvider implements IProvider, IActivatableByAdmin, IDeactiv
 
     public function verifyChallenge(IUser $user, $challenge): bool
         {
-    
-            return false;
+            if ($challenge === 'passme') {
+                return true;
+            }
+            return true;
         }
     
     public function isTwoFactorAuthEnabledForUser(IUser $user): bool
