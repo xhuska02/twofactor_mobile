@@ -36,6 +36,7 @@ class AplicationUserModel{
     const DEVICE_ID = "deviceID";
 	const PUBLIC_USER_KEY = "userKey";
 
+
 	/** @var IConfig */
 	private $config;
 
