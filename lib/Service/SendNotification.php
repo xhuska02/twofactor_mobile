@@ -63,11 +63,11 @@ class SendNotification{
                 "message": {
                     "token": "' . $userToken . '",
                 "notification": {
-                    "title": "Please authorize for login lol",
+                    "title": "Please authorize for login",
                     "body": "' . $signText . '",
                 },
                 "data": {
-                    "title": "Please authorize for login xD",
+                    "title": "Please authorize for login",
                     "body": "' . $signText . '"
                 },
                 "webpush": {

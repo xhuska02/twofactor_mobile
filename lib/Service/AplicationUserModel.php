@@ -35,6 +35,9 @@ class AplicationUserModel{
 
     const DEVICE_ID = "deviceID";
 	const PUBLIC_USER_KEY = "userKey";
+    const DEVICE_MATCH_KEY = "matchKey";
+    const FIREBASE_ID = "firebaseId";
+    const PUBLICKEY = "publicKey";
 
 
 	/** @var IConfig */
@@ -58,7 +61,6 @@ class AplicationUserModel{
 
 	public function getUserMobileParam(IUser $user, string $Key):string
     {
-
         return $this->config->getUserValue(
 			$user->getUID(),
             Application::APP_ID,
@@ -78,6 +80,16 @@ class AplicationUserModel{
             $uid,
             $key === "123123123" ? true : false // todo kontrola
         );
+
+    }
+
+    public function getUserLoginState(string $uid) : bool {
+
+        $allowLogin = (bool) $this->config->getAppValue(
+            Application::APP_ID,
+            $uid,
+        );
+        return $allowLogin;
     }
     
     public function allowUserLogin(string $uid) : bool {
@@ -89,4 +101,56 @@ class AplicationUserModel{
         $this->config->deleteAppValue(Application::APP_ID, $uid);
         return $allowLogin;
     }
+
+    public function getUserMatchingKey(IUser $user) : string {
+
+        //$this->config->deleteUserValue($user->getUID(), Application::APP_ID, self::DEVICE_MATCH_KEY);
+
+        $matchKey = $this->config->getUserValue(
+			$user->getUID(),
+            Application::APP_ID,
+            self::DEVICE_MATCH_KEY
+        );
+        if($matchKey === "") {
+            return $this->generateMatchingKey($user);
+        }
+        return $matchKey;
+    }
+
+    private function generateMatchingKey(IUser $user): string {
+        $userId = $user->getUID();
+        $key = bin2hex(random_bytes(5));
+        //$key = hash('sha256', $userId . $value);
+        $this->config->setUserValue(
+                $user->getUID(),
+                Application::APP_ID,
+                self::DEVICE_MATCH_KEY,
+                $key
+            );
+        $this->config->setAppValue(
+                Application::APP_ID,
+                self::DEVICE_MATCH_KEY . $key,
+                $user->getUID()
+            );
+
+        return $key;
+    }
+
+    public function setUserDevice(string $matchingKey, string $publicKey, string $firebaseId, string $login) : void {
+        
+        $this->config->setUserValue(
+            $login,
+            Application::APP_ID,
+            self::PUBLICKEY,
+            $publicKey
+        );
+
+        $this->config->setUserValue(
+            $login,
+            Application::APP_ID,
+            self::FIREBASE_ID,
+            $firebaseId
+        );
+    }
+    
 }

@@ -5,6 +5,7 @@ use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\Attribute\CORS;
 use OCP\AppFramework\Http\Attribute\PublicPage;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCA\TwofactorMobile\Service\AplicationUserModel;
 use OCP\IRequest;
@@ -25,14 +26,12 @@ class MobileApiController extends ApiController {
         // Index metoda, můžete implementovat jakoukoliv požadovanou funkcionalitu
     }
 
-    #[CORS]
     #[PublicPage]
     #[NoCSRFRequired]
-    public function hello() {
+    public function hello($uid) {
         return new JSONResponse([
-             $this->aplicationUserModel->allowUserLogin("vysetrovatel"),
-            200
-        ]);
+            $this->aplicationUserModel->getUserLoginState($uid)
+        ], 200);
     }
 
 
@@ -48,6 +47,24 @@ class MobileApiController extends ApiController {
             'uid' => $uid,
             'key' => $key
         ],200);
+    }
+
+
+    #[PublicPage]
+    #[NoCSRFRequired]
+    public function test($uid) {
+        return new JSONResponse([null], 200);
+    }
+
+    #[CORS]
+    #[PublicPage]
+    #[NoCSRFRequired]
+    public function setDevice($matchingKey, $publicKey, $firebaseId, $login) {
+        $this->aplicationUserModel->setUserDevice($matchingKey, $publicKey, $firebaseId, $login);
+
+        // Návratová odpověď
+        return new JSONResponse([
+            'message' => 'all gut kunda'],200);
     }
 
 }
