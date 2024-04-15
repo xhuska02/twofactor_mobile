@@ -10,14 +10,14 @@ namespace OCA\TwofactorMobile\Controller;
 	use OCP\AppFramework\Controller;
 	use OCP\AppFramework\Http\TemplateResponse;
 	use OCP\IUserManager;
-use OCP\Util;
+	use OCP\Util;
 	use OCP\IRequest;
 	use Endroid\QrCode\QrCode;
 	use Endroid\QrCode\Writer\PngWriter;
 	use Endroid\QrCode\Encoding\Encoding;
 	use OCA\TwofactorMobile\Service\AplicationUserModel;
-use OCP\IUser;
-use OCP\IUserSession;
+	use OCP\IUser;
+	use OCP\IUserSession;
 
 	class PageController extends Controller {
 
@@ -58,9 +58,9 @@ use OCP\IUserSession;
 
 			$parameters = array(
 				'pageTitle' => 'Registrace nového zařízení',
-				'userID' => $this->user->getDisplayName() . ' je kunda' . $this->secretCode,
+				'userID' => $this->user->getDisplayName() . $this->secretCode,
 				'qrCodeDataUri' => $dataUri,
-				'publicKey' => $this->aplicationUserModel->getUserMobileParam($this->user, AplicationUserModel::PUBLICKEY),
+				'publicKey' => $this->aplicationUserModel->getUserMobileParam($this->user, AplicationUserModel::PUBLIC_KEY),
 				'firebaseId' => $this->aplicationUserModel->getUserMobileParam($this->user, AplicationUserModel::FIREBASE_ID)
 			);
 

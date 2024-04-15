@@ -24,8 +24,7 @@
         <button data-modal-target="#modal">Registrace nového zařízení</button>
             <div class="modal" id="modal">
                 <div class="modal-header">
-                <div class="title">Postup registrace zařízení:</div>
-                <button data-close-button class="close-button">&times;</button>
+                    <div class="title" style="text-align: center;">Postup registrace zařízení:</div>
                 </div>
                 <div class="modal-body">
                     <p>Dobrý den, pro zpřístupnění dvoufaktorové autentizace prosím splňte následující body:</p>
@@ -35,6 +34,10 @@
                     <p>4) Po naskenování se prosím odhlašte a znovu přihlašte.</p>
                     <div class="qrCodeContainer" style="text-align:center; margin-top:20px;">
                         <img src="<?php echo htmlspecialchars($qrCodeDataUri); ?>" alt="QR Kód" style="width:200px; height:200px;">
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button data-close-button class="button">Zavřít</button>
+                        <button onclick="generateQRCode()">Generovat QR kód</button>
                     </div>
                 </div>
             </div>

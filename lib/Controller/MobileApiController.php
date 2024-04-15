@@ -64,7 +64,7 @@ class MobileApiController extends ApiController {
 
         // Návratová odpověď
         return new JSONResponse([
-            'message' => 'all gut kunda'],200);
+            'message' => 'Success'],200);
     }
 
 }

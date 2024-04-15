@@ -37,7 +37,7 @@ class AplicationUserModel{
 	const PUBLIC_USER_KEY = "userKey";
     const DEVICE_MATCH_KEY = "matchKey";
     const FIREBASE_ID = "firebaseId";
-    const PUBLICKEY = "publicKey";
+    const PUBLIC_KEY = "publicKey";
 
 
 	/** @var IConfig */
@@ -117,9 +117,22 @@ class AplicationUserModel{
         return $matchKey;
     }
 
+
+    /*
+    Funkce pro porovnání přijatého klíče s aktuálním uživatelovým.
+    */
+    public function checkUserMatchingKey($loginUID, $mKey) : bool {
+        $userMatchKey = $this->config->getUserValue(
+            $loginUID,
+            Application::APP_ID,
+            self::DEVICE_MATCH_KEY
+        );
+        return $mKey === $userMatchKey;
+    }
+
     private function generateMatchingKey(IUser $user): string {
         $userId = $user->getUID();
-        $key = bin2hex(random_bytes(5));
+        $key = bin2hex(random_bytes(25));
         //$key = hash('sha256', $userId . $value);
         $this->config->setUserValue(
                 $user->getUID(),
@@ -136,21 +149,26 @@ class AplicationUserModel{
         return $key;
     }
 
+    /*
+    Zpracování požadavku při registraci. Po spuštění funkce se zavolá checkUserMatchingKey. Po návratu true se nastaví PUBLICKEY a FIREBASE_ID
+    */
     public function setUserDevice(string $matchingKey, string $publicKey, string $firebaseId, string $login) : void {
         
-        $this->config->setUserValue(
-            $login,
-            Application::APP_ID,
-            self::PUBLICKEY,
-            $publicKey
-        );
-
-        $this->config->setUserValue(
-            $login,
-            Application::APP_ID,
-            self::FIREBASE_ID,
-            $firebaseId
-        );
+        if ($this->checkUserMatchingKey($login, $matchingKey)) {
+            $this->config->setUserValue(
+                $login,
+                Application::APP_ID,
+                self::PUBLIC_KEY,
+                $publicKey
+            );
+    
+            $this->config->setUserValue(
+                $login,
+                Application::APP_ID,
+                self::FIREBASE_ID,
+                $firebaseId
+            );
+        }
     }
     
 }
