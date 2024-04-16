@@ -26,7 +26,9 @@ declare(strict_types=1);
 
 namespace OCA\TwofactorMobile\Service;
 
+
 use OCA\TwofactorMobile\AppInfo\Application;
+use OCA\TwofactorMobile\Service\SignatureVerifier;
 use OCP\IUser;
 use OCP\IConfig;
 
@@ -43,10 +45,15 @@ class AplicationUserModel{
 	/** @var IConfig */
 	private $config;
 
+     /** @var SignatureVerifier */    
+     private $signatureVerifier;
+
 	public function __construct(
-		IConfig $config
+		IConfig $config,
+        SignatureVerifier $signatureVerifier
 	) {
 		$this->config = $config;
+        $this->signatureVerifier = $signatureVerifier;
 	}
 
     public function setUserMobileParam(string $token, IUser $user, string $Key):void
@@ -74,11 +81,19 @@ class AplicationUserModel{
             return;
         }
 
+        $pubKey = $this->config->getUserValue(
+            $uid,
+            Application::APP_ID,
+            self::PUBLIC_KEY
+        );
+
+        //$isvalid = $this->signatureVerifier->deleteSignature($key);
+        $isvalid = $this->signatureVerifier->verifySignature("123123123", $key, $pubKey);
 
         $this->config->setAppValue(
             Application::APP_ID,
             $uid,
-            $key === "123123123" ? true : false // todo kontrola
+            $isvalid === true ? true : false // todo kontrola
         );
 
     }

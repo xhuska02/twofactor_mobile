@@ -92,7 +92,7 @@ class WebMultifactorProvider implements IProvider, IActivatableByAdmin, IDeactiv
             $this->aplicationUserModel->setUserMobileParam($text ,$user, AplicationUserModel::PUBLIC_USER_KEY);
             $token=$this->aplicationUserModel->getUserMobileParam($user, AplicationUserModel::FIREBASE_ID);
             $sendNotification = new SendNotification(); // Vytvoření instance třídy SendNotification
-            $response = $sendNotification->sendNotification($token, $text . "troubo");
+            $response = $sendNotification->sendNotification($token, $text);
 
             $template = new Template(Application::APP_ID, 'PhoneMultifactorChallenge');
             $template->append('nonce', $text);
