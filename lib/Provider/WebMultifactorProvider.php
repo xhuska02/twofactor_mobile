@@ -84,10 +84,7 @@ class WebMultifactorProvider implements IProvider, IActivatableByAdmin, IDeactiv
         }
 
     public function getTemplate(IUser $user): Template
-        {
-            //$this->aplicationUserModel->setUserMobileParam("fXQTOd8_T2e63Y9zqNarv5:APA91bEJiNih5dc0wz5-JC9NYDLr-afPzAYvarXo-2a7XLAKVvEI_J_UKSD2kDDyfDLjcn_fvm0Q1nEXwbPLkCjRJXtS_S-YoKC96aeHyRP0AttdbqUwXPoXteO2daj7-F_PjTak0L4b", $user, AplicationUserModel::DEVICE_ID);
-            //$this->aplicationUserModel->setUserMobileParam("d7vw5xdZSzSNk7R9vGa3RV:APA91bEaPurjGzlGZLuTgeZHeo-ir6Tt_fO0ITAF3KtoMGS5HBKvTYEX2yth5QGEnXqkK8tzBQMZUCWjaQCivxuTRrtmzMJOokoXQAQgFXhG413Z8YM_5xyqMSN_sUby_K1Vr75_Y0YG", $user, AplicationUserModel::DEVICE_ID);
-            
+        {    
             $text = $user->getUID();
             $this->aplicationUserModel->setUserMobileParam($text ,$user, AplicationUserModel::PUBLIC_USER_KEY);
             $token=$this->aplicationUserModel->getUserMobileParam($user, AplicationUserModel::FIREBASE_ID);

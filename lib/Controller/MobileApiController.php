@@ -61,10 +61,11 @@ class MobileApiController extends ApiController {
     #[NoCSRFRequired]
     public function setDevice($matchingKey, $publicKey, $firebaseId, $login) {
         $this->aplicationUserModel->setUserDevice($matchingKey, $publicKey, $firebaseId, $login);
-
+        $this->aplicationUserModel->registerUser();
         // Návratová odpověď
         return new JSONResponse([
             'message' => 'Success'],200);
     }
+
 
 }

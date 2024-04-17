@@ -32,12 +32,13 @@
                     <p>2) V aplikaci načtěte záložku registrace a připravte si telefon k naskenování QR kódu.</p>
                     <p>3) K naskenování kódu budete mít 60 vteřin.</p>
                     <p>4) Po naskenování se prosím odhlašte a znovu přihlašte.</p>
-                    <div class="qrCodeContainer" style="text-align:center; margin-top:20px;">
+                    <div style="text-align: center; margin-top: 20px;">
+                    <div id="qrCodeContainer" class="qrCodeContainer" style="text-align:center; margin-top:20px; display:none;">
                         <img src="<?php echo htmlspecialchars($qrCodeDataUri); ?>" alt="QR Kód" style="width:200px; height:200px;">
                     </div>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button data-close-button class="button">Zavřít</button>
-                        <button onclick="generateQRCode()">Generovat QR kód</button>
+                    <button id="qrButton">Generovat QR kód</button>
+                    </div>
+
                     </div>
                 </div>
             </div>

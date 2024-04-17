@@ -29,9 +29,11 @@ namespace OCA\TwofactorMobile\Service;
 
 use OCA\TwofactorMobile\AppInfo\Application;
 use OCA\TwofactorMobile\Service\SignatureVerifier;
+use OCP\Authentication\TwoFactorAuth\IRegistry;
+use OC\Authentication\TwoFactorAuth\ProviderManager;
 use OCP\IUser;
 use OCP\IConfig;
-
+use OCP\IUserSession;
 
 class AplicationUserModel{
 
@@ -45,15 +47,24 @@ class AplicationUserModel{
 	/** @var IConfig */
 	private $config;
 
+    /** @var ProviderManager */
+	private $providerManager;
+
      /** @var SignatureVerifier */    
      private $signatureVerifier;
 
+     private IUserSession $userSession;
+
 	public function __construct(
 		IConfig $config,
-        SignatureVerifier $signatureVerifier
+        SignatureVerifier $signatureVerifier,
+        ProviderManager $providerManager,
+        IUserSession $userSession
 	) {
 		$this->config = $config;
         $this->signatureVerifier = $signatureVerifier;
+        $this->providerManager = $providerManager;
+        $this->userSession = $userSession;
 	}
 
     public function setUserMobileParam(string $token, IUser $user, string $Key):void
@@ -184,6 +195,12 @@ class AplicationUserModel{
                 $firebaseId
             );
         }
+    }
+
+    public function registerUser(string $login) : void {
+
+        $user = $this->userSession->getUser();
+        $this->providerManager->tryEnableProviderFor("twofactormobile", $user);
     }
     
 }
