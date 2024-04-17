@@ -35,12 +35,13 @@ function closeModal(modal) {
   modal.classList.remove('active')
   overlay.classList.remove('active')
 }
-document.getElementById('qrButton').addEventListener('click', () => {
+
+dataShowQR.addEventListener('click', () => {
   var qrCodeContainer = document.getElementById('qrCodeContainer');
   qrCodeContainer.style.display = 'block';
 
   // Nastavení časovače pro skrytí QR kódu po 60 vteřinách
   setTimeout(function() {
-    qrCodeContainer.style.display = 'none';
+      qrCodeContainer.style.display = 'none';
   }, 60000); // 60000 milisekund = 60 vteřin
 });

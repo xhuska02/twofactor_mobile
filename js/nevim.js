@@ -74,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    //setInterval(getAPIState,2000);
+    setInterval(getAPIState,1000);
     //setTimeout(getAPIState,4000);
 
     //setInterval(test, 2000);
 
     //submitForm();
 
-    setTimeout(submitForm, 4000);
+    //setTimeout(submitForm, 4000);
     //setInterval(submitForm, 20000);
 });

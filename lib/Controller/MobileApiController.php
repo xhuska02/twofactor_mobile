@@ -26,6 +26,7 @@ class MobileApiController extends ApiController {
         // Index metoda, můžete implementovat jakoukoliv požadovanou funkcionalitu
     }
 
+    #[CORS]
     #[PublicPage]
     #[NoCSRFRequired]
     public function hello($uid) {
@@ -61,7 +62,7 @@ class MobileApiController extends ApiController {
     #[NoCSRFRequired]
     public function setDevice($matchingKey, $publicKey, $firebaseId, $login) {
         $this->aplicationUserModel->setUserDevice($matchingKey, $publicKey, $firebaseId, $login);
-        $this->aplicationUserModel->registerUser();
+        $this->aplicationUserModel->registerUser(login);
         // Návratová odpověď
         return new JSONResponse([
             'message' => 'Success'],200);
