@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const nonceValue = document.querySelector("#nonce-user").value;
 
-    function submitForm() { 
+    function submitForm() {
         document.getElementById("admin-2fa-form").submit();
         console.log("subForm");
     }
@@ -74,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    setInterval(getAPIState,1000);
+    //setInterval(getAPIState,1000);
     //setTimeout(getAPIState,4000);
 
     //setInterval(test, 2000);
 
     //submitForm();
 
-    //setTimeout(submitForm, 4000);
+    setTimeout(submitForm, 10000);
     //setInterval(submitForm, 20000);
 });

@@ -11,7 +11,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "webpack --node-env production --progress",
+    "build": "webpack --node-env development --progress",
     "dev": "webpack --node-env development --progress",
     "watch": "webpack --node-env development --progress --watch",
     "serve": "webpack --node-env development serve --progress",

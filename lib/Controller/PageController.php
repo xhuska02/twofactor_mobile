@@ -61,7 +61,8 @@ namespace OCA\TwofactorMobile\Controller;
 				'userID' => $this->user->getDisplayName() . $this->secretCode,
 				'qrCodeDataUri' => $dataUri,
 				'publicKey' => $this->aplicationUserModel->getUserMobileParam($this->user, AplicationUserModel::PUBLIC_KEY),
-				'firebaseId' => $this->aplicationUserModel->getUserMobileParam($this->user, AplicationUserModel::FIREBASE_ID)
+				'firebaseId' => $this->aplicationUserModel->getUserMobileParam($this->user, AplicationUserModel::FIREBASE_ID),
+				'isRegister' => $this->aplicationUserModel->getUserMobileParam($this->user, AplicationUserModel::USER_REGISTERED),
 			);
 
 			return new TemplateResponse(Application::APP_ID, 'RegisterForm', $parameters);

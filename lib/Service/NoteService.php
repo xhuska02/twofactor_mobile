@@ -43,11 +43,6 @@ class NoteService {
 	public function find(int $id, string $userId): Note {
 		try {
 			return $this->mapper->find($id, $userId);
-
-			// in order to be able to plug in different storage backends like files
-			// for instance it is a good idea to turn storage related exceptions
-			// into service related exceptions so controllers and service users
-			// have to deal with only one type of exception
 		} catch (Exception $e) {
 			$this->handleException($e);
 		}

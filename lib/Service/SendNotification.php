@@ -39,7 +39,7 @@ use Google\Auth\HttpHandler\HttpHandlerFactory;
 class SendNotification{
 
 
-    public function sendNotification($userToken, $signText): string
+    public function sendNotification($userToken, $signText, $challenge): string
 	{
         
         require '/var/www/html/custom_apps/twofactormobile/vendor/autoload.php'; 
@@ -68,7 +68,8 @@ class SendNotification{
                 },
                 "data": {
                     "title": "Please authorize for login",
-                    "body": "' . $signText . '"
+                    "body": "' . $signText . '",
+                    "challenge": "' . $challenge . '"
                 },
                 "webpush": {
                     "fcm_options": {

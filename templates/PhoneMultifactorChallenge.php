@@ -10,5 +10,5 @@ script('twofactormobile', 'nevim', array('type' => 'module'));
     <input id="nonce-user" type="text" hidden="true" value="<?php p($_['nonce'][0]) ?>" readonly="readonly">
 </form>
 <form method="POST" id="admin-2fa-form">
-    <input type="hidden" name="challenge" value="passmex">
+    <input id="hesloprokokoty" type="hidden" name="challenge" value="">
 </form>
