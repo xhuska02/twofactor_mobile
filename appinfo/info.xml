@@ -25,6 +25,7 @@
         <navigation>
             <name>Twofactor Mobile</name>
             <route>twofactormobile.page.index</route>
+            <icon>img/phone.png</icon>
         </navigation>
     </navigations>
 </info>

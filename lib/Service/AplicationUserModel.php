@@ -32,7 +32,6 @@ use OCA\TwofactorMobile\Service\SignatureVerifier;
 use OC\Authentication\TwoFactorAuth\ProviderManager;
 use OCP\IUser;
 use OCP\IConfig;
-use OCP\IUserSession;
 use OCP\IUserManager;
 
 class AplicationUserModel{
@@ -126,7 +125,7 @@ class AplicationUserModel{
         $this->config->setAppValue(
             Application::APP_ID,
             $uid,
-            $isvalid === true ? true : false // todo kontrola
+            $isvalid === true ? true : false 
         );
 
     }
@@ -152,6 +151,7 @@ class AplicationUserModel{
             );
             $this->registerUser($login);
             $this->setUserRegister($login);
+
         }
     }
 

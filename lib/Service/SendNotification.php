@@ -30,16 +30,10 @@ namespace OCA\TwofactorMobile\Service;
 use Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Auth\HttpHandler\HttpHandlerFactory;
 
-// Just for testing purposes.
-// $token = "fXQTOd8_T2e63Y9zqNarv5:APA91bEJiNih5dc0wz5-JC9NYDLr-afPzAYvarXo-2a7XLAKVvEI_J_UKSD2kDDyfDLjcn_fvm0Q1nEXwbPLkCjRJXtS_S-YoKC96aeHyRP0AttdbqUwXPoXteO2daj7-F_PjTak0L4b";
-// $text = "Si mega chábr";
-// $sendNotification = new SendNotification(); // Vytvoření instance třídy SendNotification
-// $response = $sendNotification->sendNotification($token, $text);
-
 class SendNotification{
 
 
-    public function sendNotification($userToken, $signText, $challenge): string
+    public function sendNotification($userToken, $userName, $challenge): string
 	{
         
         require '/var/www/html/custom_apps/twofactormobile/vendor/autoload.php'; 
@@ -63,12 +57,12 @@ class SendNotification{
                 "message": {
                     "token": "' . $userToken . '",
                 "notification": {
-                    "title": "Please authorize for login",
-                    "body": "' . $signText . '",
+                    "title": "Prosím autorizujte se v aplikaci",
+                    "body": "' . $userName . '",
                 },
                 "data": {
-                    "title": "Please authorize for login",
-                    "body": "' . $signText . '",
+                    "title": "Prosím autorizujte se v aplikaci",
+                    "body": "' . $userName . '",
                     "challenge": "' . $challenge . '"
                 },
                 "webpush": {
