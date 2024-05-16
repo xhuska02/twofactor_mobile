@@ -51,9 +51,9 @@ Vyřešeno přidáním do konfigurace serveru `/var/www/html/config/config.php` 
   array (
     0 => 'localhost',
     1 => '192.168.1.38',
-  ),
+  ),````
 
-# Adding two-factor authentication for Nextcloud
+## Adding two-factor authentication for Nextcloud
 
 After installing Nextcloud, you need to add the project to the project:
 
