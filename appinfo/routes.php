@@ -19,8 +19,8 @@ return [
 	],
 	'routes' => [
         ['name' => 'page#index', 'url' => '/api/1.0', 'verb' => 'GET'],
-        ['name' => 'mobile_api#hello', 'url' => '/api/1.0/hello', 'verb' => 'POST', 'protected' => false],
-        ['name' => 'mobile_api#foo', 'url' => '/api/1.0/foo', 'verb' => 'POST', 'protected' => false],
+        ['name' => 'mobile_api#checkLogin', 'url' => '/api/1.0/checkLogin', 'verb' => 'POST', 'protected' => false],
+        ['name' => 'mobile_api#login', 'url' => '/api/1.0/login', 'verb' => 'POST', 'protected' => false],
 		['name' => 'mobile_api#setDevice', 'url' => '/api/1.0/set-device', 'verb' => 'POST', 'protected' => false],
 		['name' => 'mobile_api#test', 'url' => '/api/1.0/test', 'verb' => 'GET','protected' => false],
 	]

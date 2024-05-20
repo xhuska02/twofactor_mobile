@@ -51,7 +51,7 @@ class MobileApiController extends ApiController {
     #[CORS]
     #[PublicPage]
     #[NoCSRFRequired]
-    public function hello($uid) {
+    public function checkLogin($uid) {
         return new JSONResponse([
             $this->aplicationUserModel->getUserLoginState($uid)
         ], 200);
@@ -61,7 +61,7 @@ class MobileApiController extends ApiController {
     #[CORS]
     #[PublicPage]
     #[NoCSRFRequired]
-    public function foo($uid, $key) {
+    public function login($uid, $key) {
         $this->aplicationUserModel->setUserAllowLogin($uid, $key);
 
         // Návratová odpověď
