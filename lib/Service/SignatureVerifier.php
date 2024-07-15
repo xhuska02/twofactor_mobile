@@ -47,12 +47,4 @@ class SignatureVerifier{
         }
     }
 
-    public function stupidSignature($data, $signature, $publicKey) {
-        if($data != null && $signature != null && $publicKey == "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEEZPXihGJJVtQ3iDV6+jxhB/xf2xuIYfO3/xw4oiJ2lDkcuiagrYY2La31Bn30dvXa2wN0WYhu4fojRs4ABuM3A=="){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
